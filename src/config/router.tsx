@@ -1,26 +1,28 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./protectedroute";
+import Home from "../pages/home";
+import Login from "../pages/login";
+import SignUp from "../pages/signup";
 
+const RouterComponent = () => {
+  const authRoutes = [
+    { path: "/login", element: <Login /> },
+    { path: "/signup ", element: <SignUp /> },
+  ];
+  const inAppRoutes = [{ path: "/home", element: <Home /> }];
 
-
-const RouterComponent = () =>{
-    const authRoutes = [
-        {path:"/login", element:},
-        {path: "/signup ", element:}
-    ]
-    const inAppRoutes= [{path: "",element:}]
-
-    return (
-        <Routes>
-      {authRoutes.map(({path, element}) => (
+  return (
+    <Routes>
+      {authRoutes.map(({ path, element }) => (
         <Route key={path} path={path} element={element} />
       ))}
 
       <Route element={<ProtectedRoute />}>
-        {inAppRoutes.map(({path, element}) => (
+        {inAppRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
         ))}
       </Route>
     </Routes>
-    )
-}
+  );
+};
+export default RouterComponent;
