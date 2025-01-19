@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+import Loader from '@/components/loader';
 
 interface AuthContextType {
   user: User | null;
@@ -93,7 +94,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     <AuthContext.Provider
       value={{...state, user, login, signUp, logout, googleLogin}}
     >
-      {children}
+      {loadingUserState ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };
