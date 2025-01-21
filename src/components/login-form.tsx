@@ -27,6 +27,7 @@ export function LoginForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await login(email, password);
@@ -38,6 +39,9 @@ export function LoginForm({
   };
   const handleSignUp = () => {
     navigate('/signup');
+  };
+  const handleForgotPassword = () => {
+    navigate('/forgotpassword');
   };
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -65,12 +69,14 @@ export function LoginForm({
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
+
+                  <button
+                    onClick={handleForgotPassword}
+                    type="button"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </button>
                 </div>
                 <Input
                   id="password"
@@ -83,7 +89,7 @@ export function LoginForm({
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? (
                   <div className="flex justify-center items-center">
-                    <ClipLoader color="#fff" loading={loading} size={24} />{' '}
+                    <ClipLoader color="#fff" loading={loading} size={24} />
                   </div>
                 ) : (
                   'Login'
